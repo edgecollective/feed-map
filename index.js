@@ -50,7 +50,7 @@ app.get("/", function(req, res) {
 app.get("/", function(req, res) {
     //var feedkey = String(req.params.feedkey);
     var map_url = 'https://www.thoughtco.com/thmb/78yp4LX-ib10jQdSRslNYianKu8=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/floorplan-138720186-crop2-58a876a55f9b58a3c99f3d35.jpg';
-
+    //var map_url = 'https://drive.google.com/uc?id=1i8fIEXVZiW_Hdgt0qFnmY_KZPvT';
     var allfeeddata = [];
 
     var itemsProcessed = 0;

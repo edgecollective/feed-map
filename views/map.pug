@@ -13,27 +13,22 @@ html
         div
             form(action='/addtask' method='POST')
                     fieldset
-                        h2 Visualize Bayou-CO2 Feeds
-                        p 
-                            each feed in feeds
-                                ul
-                                    li= feed.feedkey
+                        h2 Visualize CO2 Feeds
+                        //p 
+                        //    each feed in feeds
+                        //        ul
+                        //            li= feed.feedkey
                         //p Enter in the feed keys you'd like to display, one at a time:
-                        input#newtask(type='text' name='newfeed' placeholder='add new feed')
+                        input#newtask(type='text' name='newfeed' placeholder='Add new feed')
+                        br
                         br
                         button(type='submit') Add Feed
                         
         div.flex-container(id='pop')
             div.flex-child
-                //div
-                //p.boxsmaller test
-                //canvas#chart1
-                //p.boxsmaller test
-                //canvas(id=2)
-                //each feed in feeds
-                //    p !{feed.feedkey}
                 each val, i in feeds
-                    canvas(id='chart'+i)
+                    p.boxsmaller !{val.feedkey}
+                    canvas(id='chart'+i height='100px')
             div.flex-child
                 img(src=map_url)
                 
