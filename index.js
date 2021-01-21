@@ -51,18 +51,31 @@ app.get("/", function(req, res) {
     //var feedkey = String(req.params.feedkey);
     var map_url = 'https://www.thoughtco.com/thmb/78yp4LX-ib10jQdSRslNYianKu8=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/floorplan-138720186-crop2-58a876a55f9b58a3c99f3d35.jpg';
 
-    var feedkey = feeds[0].feedkey;
-    var allfeeds = [];
-    
-    var feedurl = 'http://data.pvos.org/co2/data/'+feedkey+'/json/';
-    fetch(feedurl)
+    var allfeeddata = [];
+
+    var itemsProcessed = 0;
+
+    feeds.forEach(feed => {
+
+        var feedkey = feed.feedkey;
+        var feedurl = 'http://data.pvos.org/co2/data/'+feedkey+'/json/';        
+        fetch(feedurl)
         .then(res => res.json())
         .then(data => {
-            res.render('map', {bayoudata:data,feeds:feeds,map_url:map_url});
+            allfeeddata.push(data);
+            itemsProcessed++;
+
+            if(itemsProcessed=== feeds.length) {
+                res.render('map', {bayoudata:allfeeddata,feeds:feeds,map_url:map_url});
+            }
         })
         .catch(err => {
-            res.send(err);
+            console.log(err);
         });
+    });
+    
+    
+   
 });
 
 

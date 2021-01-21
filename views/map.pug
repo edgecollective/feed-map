@@ -23,11 +23,17 @@ html
                         br
                         button(type='submit') Add Feed
                         
-        div.flex-container
+        div.flex-container(id='pop')
             div.flex-child
-                canvas#chart1
-                br
-                canvas#chart2
+                //div
+                //p.boxsmaller test
+                //canvas#chart1
+                //p.boxsmaller test
+                //canvas(id=2)
+                //each feed in feeds
+                //    p !{feed.feedkey}
+                each val, i in feeds
+                    canvas(id='chart'+i)
             div.flex-child
                 img(src=map_url)
                 
@@ -37,5 +43,7 @@ html
 
         script.  
             var bdata = !{JSON.stringify(bayoudata)};
-            makeChart("chart1",bdata,"co2");
-            makeChart("chart2",bdata,"tempc");
+            for (i=0; i<bdata.length;i++) {
+                var chartid = "chart"+String(i);
+                makeChart(chartid,bdata[i],"co2");
+            }
