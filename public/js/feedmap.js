@@ -1,6 +1,38 @@
 
 
-function makeChart(docid,bdata,param_key)
+function makeMap(docid)
+{
+    var map = L.map(docid, {
+        minZoom: 1,
+        maxZoom: 4,
+        center: [0, 0],
+        zoom: 3,
+        crs: L.CRS.Simple
+      });
+
+      var w = 725,
+      h = 481,
+      url = 'https://www.thoughtco.com/thmb/78yp4LX-ib10jQdSRslNYianKu8=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/floorplan-138720186-crop2-58a876a55f9b58a3c99f3d35.jpg';
+
+      var southWest = map.unproject([0, h], map.getMaxZoom()-1);
+          var northEast = map.unproject([w, 0], map.getMaxZoom()-1);
+          var bounds = new L.LatLngBounds(southWest, northEast);
+      
+          // add the image overlay, 
+          // so that it covers the entire map
+          L.imageOverlay(url, bounds).addTo(map);
+      
+          // tell leaflet that the map is exactly as big as the image
+          map.setMaxBounds(bounds);
+      
+       console.log('got here');
+
+
+
+}
+    
+    
+    function makeChart(docid,bdata,param_key)
 {
     //console.log(param_key);
 
