@@ -87,7 +87,7 @@ ul {
     #width:100px;
 } 
 
-.map {
+#image-map {
     height:100%;
-    #background-color:red;
+    background: rgb(245, 245, 245);
 }

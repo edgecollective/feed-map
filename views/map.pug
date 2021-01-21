@@ -28,12 +28,12 @@ html
                         button(type='submit') Add Feed
                         
         script(src='/js/feedmap.js')
-                      
+
         div.flex-container(id='pop')
             div.flex-child
                 each val, i in feeds
                     p.boxsmaller !{val.feedkey}
-                    canvas(id='chart'+i height='100px')
+                    canvas(id='chart'+i height='80px')
             div.flex-child
                 p.map(id='image-map')
                 //img(src=map_url)
