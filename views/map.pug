@@ -1,0 +1,41 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title feed-mamp
+        link(rel='stylesheet', href='/styles.css')
+        script(src='https://cdn.jsdelivr.net/npm/luxon@1.25.0/build/global/luxon.min.js')
+        script(src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3')
+        //script(src='https://cdn.jsdelivr.net/npm/luxon@1.22.1')
+        script(src='https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@0.2.1')
+
+    body
+        div
+            form(action='/addtask' method='POST')
+                    fieldset
+                        h2 Visualize Bayou-CO2 Feeds
+                        p 
+                            each feed in feeds
+                                ul
+                                    li= feed.feedkey
+                        //p Enter in the feed keys you'd like to display, one at a time:
+                        input#newtask(type='text' name='newfeed' placeholder='add new feed')
+                        br
+                        button(type='submit') Add Feed
+                        
+        div.flex-container
+            div.flex-child
+                canvas#chart1
+                br
+                canvas#chart2
+            div.flex-child
+                img(src=map_url)
+                
+
+                        
+        script(src='/js/feedmap.js')
+
+        script.  
+            var bdata = !{JSON.stringify(bayoudata)};
+            makeChart("chart1",bdata,"co2");
+            makeChart("chart2",bdata,"tempc");

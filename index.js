@@ -1,8 +1,7 @@
-//dependencies required for the app
 var express = require("express");
 var bodyParser = require("body-parser");
 var app = express();
-
+const fetch   = require('node-fetch');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "pug");
@@ -40,12 +39,34 @@ app.post("/removetask", function(req, res) {
     res.redirect("/");
 });
 
+/*
 //render the ejs and display added task, completed task
 app.get("/", function(req, res) {
     res.render("index", { feeds: feeds});
 });
+*/
+
+
+app.get("/", function(req, res) {
+    //var feedkey = String(req.params.feedkey);
+    var map_url = 'https://www.thoughtco.com/thmb/78yp4LX-ib10jQdSRslNYianKu8=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/floorplan-138720186-crop2-58a876a55f9b58a3c99f3d35.jpg';
+
+    var feedkey = feeds[0].feedkey;
+    var allfeeds = [];
+    
+    var feedurl = 'http://data.pvos.org/co2/data/'+feedkey+'/json/';
+    fetch(feedurl)
+        .then(res => res.json())
+        .then(data => {
+            res.render('map', {bayoudata:data,feeds:feeds,map_url:map_url});
+        })
+        .catch(err => {
+            res.send(err);
+        });
+});
+
 
 //set app to listen on port 3000
-app.listen(3001, function() {
-    console.log("server is running on port 3001");
+app.listen(3004, function() {
+    console.log("server is running on port 3004");
 });
