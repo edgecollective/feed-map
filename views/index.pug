@@ -8,7 +8,8 @@ html
 div.container
     form(action='/addtask' method='POST')
         fieldset
-            h2 Add new Feeds
+            h2 Add New Feeds
+            //p Enter in the feed keys you'd like to display, one at a time:
             input#newtask(type='text' name='newfeed' placeholder='add new feed')
             br
             button(type='submit') Add Feed

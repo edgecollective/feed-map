@@ -10,7 +10,7 @@ app.set("view engine", "pug");
 app.use(express.static("public"));
 
 //placeholders for added task
-var feeds = [{"feedkey":23523},{"feedkey":2342352}];
+var feeds = [{"feedkey":'cbb8d444591def61d4e59f9b53d3193dd7724a9d8599c6ee'},{"feedkey":'3897755c6379d00bbb1d622827b1ffd1ba6a0579802044c9'}];
 //placeholders for removed task
 //var complete = [{"feedkey":23523}];
 
