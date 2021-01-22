@@ -26,6 +26,11 @@ html
                         input#xposition(type='text' name='xposition' placeholder='x position')
                         input#xposition(type='text' name='xposition' placeholder='y position')
                         button(type='submit') Add Feed
+                        hr
+                        each val, i in feeds
+                            input#feed(type='checkbox' name='feed' checked)
+                            | !{val.feedkey}
+                            br
                         
         script(src='/js/feedmap.js')
 
@@ -34,6 +39,7 @@ html
                 each val, i in feeds
                     p.boxsmaller !{val.feedkey}
                     canvas(id='chart'+i height='80px')
+                    hr
             div.flex-child
                 p.map(id='image-map')
                 //img(src=map_url)
