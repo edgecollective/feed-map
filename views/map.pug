@@ -41,7 +41,7 @@ html
         div
             form(action='/addtask' method='POST')
                     fieldset
-                        h3 Add datafeeds to map:
+                        h3 Add Datafeeds to Map:
                         //p Enter in the feed keys you'd like to display, one at a time:
                         input#newfeed(type='text' name='newfeed' placeholder='Feed key') 
                         |  -- the 'public key' for the feed you'd like to visualize.
@@ -55,7 +55,7 @@ html
                         br
                         button(type='submit') Add New Data Feed
             form(action='/addtask' method='POST')
-                    fieldset
+                   // fieldset
                         h3 Set the Basemap:
                         input#newtask(type='text' name='newfeed' placeholder='Feed key') 
                         |  -- URL for the map image (PNG, JPG, GIF) you'd like to use.

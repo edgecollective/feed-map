@@ -16,7 +16,9 @@ function makeMap(docid,map_url)
       var w = 725,
       h = 481;
       var url = map_url;
-      
+
+      //var url = "/images/a2floor.png";
+
       var southWest = map.unproject([0, h], map.getMaxZoom()-1);
           var northEast = map.unproject([w, 0], map.getMaxZoom()-1);
           var bounds = new L.LatLngBounds(southWest, northEast);
@@ -53,7 +55,7 @@ function makeMap(docid,map_url)
          html: L.Util.template(iconSettings.mapIconUrl, iconSettings), //.replace('#','%23'),
          //html: '<h1>hello</h1>',
          iconAnchor: [12, 32],
-         iconSize: [25, 30],
+         iconSize: [30, 30],
          popupAnchor: [0, -28]
        });
      
@@ -69,7 +71,7 @@ function makeMap(docid,map_url)
        });
      
        var coords = [
-       [-49, 60],[-20, 20]
+       [-43, 48],[-22, 55]
        ];
 
        var markerArray = [];
