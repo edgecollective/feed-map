@@ -3,7 +3,7 @@
     marker.setIcon(divIconActive);
   };
 
-function makeMap(docid)
+function makeMap(docid,map_url)
 {
     var map = L.map(docid, {
         minZoom: 1,
@@ -14,9 +14,9 @@ function makeMap(docid)
       });
 
       var w = 725,
-      h = 481,
-      url = 'https://www.thoughtco.com/thmb/78yp4LX-ib10jQdSRslNYianKu8=/768x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/floorplan-138720186-crop2-58a876a55f9b58a3c99f3d35.jpg';
-
+      h = 481;
+      var url = map_url;
+      
       var southWest = map.unproject([0, h], map.getMaxZoom()-1);
           var northEast = map.unproject([w, 0], map.getMaxZoom()-1);
           var bounds = new L.LatLngBounds(southWest, northEast);
@@ -69,11 +69,13 @@ function makeMap(docid)
        });
      
        var coords = [
-       [-49, 60],[-20, 20] 
+       [-49, 60],[-20, 20]
        ];
 
        var markerArray = [];
        var iMarker = -1;
+     
+      
      
        $.each(coords, function(i, e) {
          // create the button
@@ -210,6 +212,73 @@ function makeMap(docid)
         borderColor: 'rgb(255, 99, 132)',
         data: param_vs_time
         }]
+        },
+        // Configuration options go here
+        options: {
+        scales: {
+        xAxes: [{
+        type: 'time',
+        distribution: 'linear',
+        ticks: {
+        major: {
+        enabled: true, // <-- This is the key line
+        fontStyle: 'bold', //You can also style these values differently
+        fontSize: 14, //You can also style these values differently
+        },
+        },
+        }],
+        },
+        zone: "America/NewYork"
+        }
+        });
+}
+
+function makeChartOverlay(docid,bayoudata,param_key)
+{
+    //console.log(param_key);
+    console.log(bayoudata.length);
+
+    var bdata=bayoudata[0];
+
+    var ctx = document.getElementById(docid).getContext('2d');
+
+    //resize canvas
+    var datasets =[];
+    var colors = ['red','green','blue','purple','yellow'];
+    var feedcount=0;
+
+    bayoudata.forEach(feed =>
+    {
+        console.log(feed.feed_pubkey);
+        var feed_data = feed.data;
+        var param_vs_time = [];
+        for(var i = 0; i < feed_data.length; i++) {
+            var thisco2 = feed_data[i].parameters[param_key];
+            var timeutc = feed_data[i].timestamp;
+            var localtime = luxon.DateTime.fromISO(timeutc).toLocal().toString();
+            param_vs_time.push({"t":localtime,"y":thisco2});
+        }
+        var feed_pubkey = feed.feed_pubkey;
+        var feed_shortname = feed_pubkey.substr(0,4)+"...";
+        var chartcolor = colors[feedcount];
+        console.log(chartcolor);
+        var dataset = {
+            "data":param_vs_time,
+            //"label":feed.feed_pubkey,
+            "label":feed_shortname,
+            borderColor: chartcolor,
+            "fill":true
+        }
+        datasets.push(
+            dataset
+        );
+        feedcount++;
+    });    
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+        datasets: datasets
         },
         // Configuration options go here
         options: {

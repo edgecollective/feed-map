@@ -15,47 +15,58 @@ html
         
 
     body
-        div
-            form(action='/addtask' method='POST')
-                    fieldset
-                        h2 Visualize Bay-CO2 Feeds:
-                        p.blurb Note: x and y are measured in pixels; (0,0) is at top left.
-                        //
-                        //p Enter in the feed keys you'd like to display, one at a time:
-                        input#newtask(type='text' name='newfeed' placeholder='Feed key')
-                        input#xposition(type='text' name='xposition' placeholder='x position')
-                        input#xposition(type='text' name='xposition' placeholder='y position')
-                        button(type='submit') Add Feed
-                        hr
-                        each val, i in feeds
-                            input#feed(type='checkbox' name='feed' checked)
-                            | !{val.feedkey}
-                            br
-                        
         script(src='/js/feedmap.js')
 
+        p.boxsmaller Feedmap: <b>"Artisan's Asylum"</b>
+        //p.box <b>Feedmap Description:</b> "CO2 Monitors at Somerville Site"
+        p.box <b>Feedmap Key:</b> 91def61d4e59f9b53d319355c6379d00b
+        p.box <b>Feedmap Homepage:</b> <a href="">http://data.pvos.org/feedmaps/91def61d4e59f9b53d319355c6379d00b</a>
+        p.box <b>Basemap (URL):</b> !{JSON.stringify(map_url)}
+        p.box <b>Data Feeds:</b>
+        each val, i in feeds
+            input#feed(type='checkbox' name='feed' checked)
+            | !{val.feedkey}
+            br
+        p 
+        br
         div.flex-container(id='pop')
             div.flex-child
-                each val, i in feeds
-                    p.boxsmaller !{val.feedkey}
-                    canvas(id='chart'+i height='80px')
-                    hr
+                canvas(id='chart' height='150px')
             div.flex-child
                 p.map(id='image-map')
                 //img(src=map_url)
                 
+        hr
 
-        
-
+        div
+            form(action='/addtask' method='POST')
+                    fieldset
+                        h3 Add datafeeds to map:
+                        //p Enter in the feed keys you'd like to display, one at a time:
+                        input#newfeed(type='text' name='newfeed' placeholder='Feed key') 
+                        |  -- the 'public key' for the feed you'd like to visualize.
+                        br
+                        input#xposition(type='text' name='xposition' placeholder='x position')
+                        input#yposition(type='text' name='yposition' placeholder='y position')
+                        |  -- x, y coordinates of the feed on the map (in pixels)
+                        br
+                        input#nickname(type='text' name='nickname' placeholder='short nickname')
+                        |  -- a short nickname for this feed.
+                        br
+                        button(type='submit') Add New Data Feed
+            form(action='/addtask' method='POST')
+                    fieldset
+                        h3 Set the Basemap:
+                        input#newtask(type='text' name='newfeed' placeholder='Feed key') 
+                        |  -- URL for the map image (PNG, JPG, GIF) you'd like to use.
+                        br
+                        button(type='submit') Set Basemap URL
         //div.map(id='image-map')
         
         script. 
-            makeMap('image-map');
+            makeMap('image-map',!{JSON.stringify(map_url)});
             console.log('yeah');
 
         script.  
             var bdata = !{JSON.stringify(bayoudata)};
-            for (i=0; i<bdata.length;i++) {
-                var chartid = "chart"+String(i);
-                makeChart(chartid,bdata[i],"co2");
-            }
+            makeChartOverlay('chart',bdata,"co2");
