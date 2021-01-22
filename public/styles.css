@@ -24,13 +24,13 @@ body {
 
 form {
     position : relative;
-    #eeborder:0;
+    #border: 1px solid #999;
     #width  : max-content;
     #height : 498px;
     margin : 0 auto;
     padding: 10px;
     box-sizing: border-box;
-    #background : #FFF url(background.jpg)
+    #background-color: rgb(219, 211, 211);
 }
 
 .boxsmaller{
@@ -39,7 +39,7 @@ form {
     display: block;
     padding: 10px;
     #width:max-content;
-    font-size: 16px;
+    font-size: 13px;
     width: fit-content(10em);
     margin-left: 40px;
     margin-right: 40px;
@@ -79,6 +79,7 @@ ul {
 .flex-child {
     flex: 1;
     #border: 1px solid #999;
+    text-align:center;
 }
 
 

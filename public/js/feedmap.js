@@ -69,13 +69,11 @@ function makeMap(docid)
        });
      
        var coords = [
-       [-49, 60],[-20, 20],[-30,30]  
+       [-49, 60],[-20, 20] 
        ];
 
        var markerArray = [];
        var iMarker = -1;
-     
-      
      
        $.each(coords, function(i, e) {
          // create the button
