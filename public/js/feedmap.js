@@ -69,7 +69,7 @@ function makeMap(docid)
        });
      
        var coords = [
-       [-49, 50],[-20, 20]  
+       [-49, 60],[-20, 20],[-30,30]  
        ];
 
        var markerArray = [];
