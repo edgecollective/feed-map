@@ -22,10 +22,10 @@ html
         p.box <b>Feedmap Key:</b> 91def61d4e59f9b53d319355c6379d00b
         p.box <b>Feedmap Homepage:</b> <a href="">http://data.pvos.org/feedmaps/91def61d4e59f9b53d319355c6379d00b</a>
         p.box <b>Basemap (URL):</b> !{JSON.stringify(map_url)}
-        p.box <b>Data Feeds:</b>
+        p.box <b>Data Feeds in this Feedmap:</b>
         each val, i in feeds
             input#feed(type='checkbox' name='feed' checked)
-            | !{val.feedkey}
+            | !{val.feed_name} --- !{val.feedkey}
             br
         p 
         br
