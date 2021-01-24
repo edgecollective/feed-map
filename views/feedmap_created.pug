@@ -7,33 +7,10 @@ html
 
     body
 
-    h1 Feedmap: "#{feedmap_name}"
+    p.boxsmaller New Feedmap Created!
 
+    h1 Feedmap: "#{feedmap_name}"
+    
     p.boxsmaller <b>Public Key:</b> #{feedmap_pubkey}
     p.boxsmaller <b>Private Key:</b> #{private_key}
     p.boxsmaller <b>Map URL:</b> #{map_url}
-    p.boxsmaller <b>Feeds:</b>
-    ul
-        li This one
-        li That one
-
-        div.flex-container
-            div.flex-child
-                form(action='/addtask' method='POST')
-                    fieldset
-                        h2 Add New Feeds
-                        //p Enter in the feed keys you'd like to display, one at a time:
-                        input#newtask(type='text' name='newfeed' placeholder='add new feed')
-                        br
-                        button(type='submit') Add Feed
-                        br
-                        h2 Feeds
-                        p 
-                            //each feed in feeds
-                                //ul
-                                    //li= feed.feedkey
-            div.flex-child 
-                canvas#chart1
-
-                        
-        script(src='/js/feedmap.js')

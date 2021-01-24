@@ -63,3 +63,18 @@ exports.postNewFeed = function(req, res, next) {
     }
 
 }
+
+exports.feedAdmin = function(req, res, next) {
+    // Extract into variables from request body
+    //var { feed_name} = req.body;
+    
+    console.log('feedmap_admin!');
+    var feedmap_name = 'hello';
+    var public_key = '2342';
+    var private_key = '234234'
+    var map_url = '234234'
+    var base_url = '234234'
+    
+    res.status(200).render('feedmap_admin',{feedmap_name:feedmap_name,feedmap_pubkey:public_key,private_key:private_key,map_url:map_url,base_url:base_url});
+
+}

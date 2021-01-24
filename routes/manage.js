@@ -7,4 +7,6 @@ var manager = require('../controllers/managementControllers');
 
 router.post('/', manager.postNewFeed);
 
+router.get('/:feed_pubkey/:feed_privkey', manager.feedAdmin);
+
 module.exports = router;
