@@ -1,0 +1,47 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title Feedmaps
+        link(rel='stylesheet', href='/style.css')
+
+body
+
+//<img src="/images/bayou_favicon.png">
+
+h1 <a href="/feedmaps">Feedmaps</a><br>
+
+//p.banner <a href="">View Bayou-CO2 source code</a> &nbsp | &nbsp <a href="https://edgecollective.io/posts/notes/co2/">Buy or Build an Open Hardware CO2 Monitor</a> 
+
+p.blurblarger <b><a href="/about">Feedmaps</a></b> provides a simple, 'free and open source' way to view sensor feed data, and locate it on a 'map' (a user-supplied image).
+
+li.boxsmaller - <a href="">Source code available</a> (GPL 3.0)
+li.boxsmaller - Funded on a pay-as-you-can basis via <a href="">Open Collective</a> -- Cheers!
+
+p.blurblarger  <b><a href="/about">Feedmap</a></b> is currently set up to work only with <a href="/">Bayou</a>, but we are working on a plugin architecture that would enable viewing data feeds from e.g. Adafruit.io and Thingspeak, among others.
+p
+p
+
+h1 Getting Started with Feedmaps<br>
+
+form(action='/feedmap/manage' method='POST')
+    fieldset
+        h3 Create a New Feedmap
+        label New Feedmap Name: 
+        input#feedmap_name(type='text' name='feedmap_name' placeholder='Living room, Northwest side' required='')
+        br
+        label Map URL:
+        input#feedmap_name(type='text' name='map_url' placeholder='http://cnn.com' required='')
+        br
+        button(type='submit') Create new feedmap
+br
+
+form(action='/co2/formData' method='POST')
+    fieldset
+        h3 View an Existing Feedmap
+        label Feed Public Key: 
+        input#feed_id_page(type='text' name='feed_id' placeholder='Your Feed\'s Public Key' required='')
+        br
+        br
+        // <button type ="reset">Reset</button>
+        button(type='submit') View Data

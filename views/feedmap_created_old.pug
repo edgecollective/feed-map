@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title Feedmaps
+        link(rel='stylesheet', href='/style.css')
+
+h1 You've created a new data feed!
+
+li.boxsmaller <b>Feedmap Name:</b> "#{feedmap_name}"
+li.boxsmaller <b>Map URL:</b> #{map_url}
+li.boxsmaller <b>Feed Public Key:</b> #{public_key}
+li.boxsmaller <b>Feed Private Key:</b> #{private_key}
+li.boxsmaller <b>Feed Home Page:</b> <a href="/co2/data/#{feed_pubkey}">http://#{base_url}/feedmap/data/#{feed_pubkey}</a>
+
+p.blurb (<b>IMPORTANT</b>: you should immediately record the above information -- these keys won't be shown again!)
+
+<hr>
+
+<a href="/feedmaps/">Back to Feedmaps Home</a>
