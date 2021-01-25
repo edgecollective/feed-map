@@ -6,6 +6,10 @@ const crypto = require("crypto");
 require('dotenv').config({ path: __dirname + '/.env' })
 var base_url = process.env['BASE_URL']
 
+const getFeedDetails = (feedmap_pubkey) => db.query('SELECT * FROM feedmaps WHERE public_key = $1', [feedmap_pubkey]).then(response => response.rows[0])
+.catch((err) => {
+    console.log("couldn't find feedmap_id for that key!");
+  });
 
 exports.postNewFeed = function(req, res, next) {
     // Extract into variables from request body
@@ -67,14 +71,29 @@ exports.postNewFeed = function(req, res, next) {
 exports.feedAdmin = function(req, res, next) {
     // Extract into variables from request body
     //var { feed_name} = req.body;
-    
-    console.log('feedmap_admin!');
+    //router.get('/:feedmap_pubkey/:feedmap_privkey', manager.feedAdmin);
+    //console.log(req.params);
+
+    var public_key = req.params.feedmap_pubkey;
+    var private_key = req.params.feedmap_privkey;
+
+    //console.log(public_key);
+
+
     var feedmap_name = 'hello';
-    var public_key = '2342';
-    var private_key = '234234'
+    //var public_key = '2342';
+    //var private_key = '234234'
     var map_url = '234234'
     var base_url = '234234'
     
-    res.status(200).render('manage_feedmap',{feedmap_name:feedmap_name,feedmap_pubkey:public_key,private_key:private_key,map_url:map_url,base_url:base_url});
+    //res.status(200).render('manage_feedmap',{feedmap_name:feedmap_name,feedmap_pubkey:public_key,private_key:private_key,map_url:map_url,base_url:base_url});
+
+    getFeedDetails(String(public_key))
+    .then((feedmap_params) => {
+       console.log(feedmap_params);
+   res.render('manage_feedmap',{feedmap_pubkey:feedmap_params.public_key,private_key:private_key,feedmap_name:feedmap_params.name,map_url:feedmap_params.map_url,base_url:base_url});
+    }).catch((err) => {
+       console.log("Something went wrong with getPage!");
+      });
 
 }
