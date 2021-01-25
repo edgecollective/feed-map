@@ -7,10 +7,18 @@ html
 
     body
 
-    p.boxsmaller New Feedmap Created!
 
-    h1 Feedmap: "#{feedmap_name}"
-    
+    h1 New Feedmap Created!
+    p.boxsmaller <b>Name:</b> "#{feedmap_name}"
     p.boxsmaller <b>Public Key:</b> #{feedmap_pubkey}
     p.boxsmaller <b>Private Key:</b> #{private_key}
     p.boxsmaller <b>Map URL:</b> #{map_url}
+    p.boxsmaller <b>Public Feedmap URL:</b>  <a href="/feedmap/#{feedmap_pubkey}/">http://data.pvos.org/feedmap/#{feedmap_pubkey}</a>
+    p.boxsmaller <b>Manage Feedmap URL:</b> <a href="/feedmap/manage/#{feedmap_pubkey}/#{private_key}">http://data.pvos.org/feedmap/manage/#{feedmap_pubkey}/#{private_key}</a>
+    br
+    hr
+    h2 Next Steps:
+    
+    p.box <b>PLEASE NOTE!</b> You should record the above information somewhere safe -- you won't be shown these keys again.
+    p.box You can now visit the "Manage Feedmap URL" to add data feeds to your new feedmap or change the Map URL. Do not share this link to anyone you don't want editing the feedmap!
+    p.box Anyone provided with the "Public Feedmap URL" can view (but not edit) the feedmap.

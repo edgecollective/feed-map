@@ -75,6 +75,6 @@ exports.feedAdmin = function(req, res, next) {
     var map_url = '234234'
     var base_url = '234234'
     
-    res.status(200).render('feedmap_admin',{feedmap_name:feedmap_name,feedmap_pubkey:public_key,private_key:private_key,map_url:map_url,base_url:base_url});
+    res.status(200).render('manage_feedmap',{feedmap_name:feedmap_name,feedmap_pubkey:public_key,private_key:private_key,map_url:map_url,base_url:base_url});
 
 }
